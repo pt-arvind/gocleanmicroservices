@@ -1,8 +1,8 @@
 # Clean Architecture in Go
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/josephspurrier/gocleanarchitecture)](https://goreportcard.com/report/github.com/josephspurrier/gocleanarchitecture)
-[![GoDoc](https://godoc.org/github.com/josephspurrier/gocleanarchitecture?status.svg)](https://godoc.org/github.com/josephspurrier/gocleanarchitecture)
-[![Coverage Status](https://coveralls.io/repos/github/josephspurrier/gocleanarchitecture/badge.svg?branch=master&randid=4)](https://coveralls.io/github/josephspurrier/gocleanarchitecture?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pt-arvind/gocleanarchitecture)](https://goreportcard.com/report/github.com/pt-arvind/gocleanarchitecture)
+[![GoDoc](https://godoc.org/github.com/pt-arvind/gocleanarchitecture?status.svg)](https://godoc.org/github.com/pt-arvind/gocleanarchitecture)
+[![Coverage Status](https://coveralls.io/repos/github/pt-arvind/gocleanarchitecture/badge.svg?branch=master&randid=4)](https://coveralls.io/github/pt-arvind/gocleanarchitecture?branch=master)
 
 A good example of clean architecture for a web application in Go.
 

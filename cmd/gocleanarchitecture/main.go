@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/josephspurrier/gocleanarchitecture/lib/boot"
+	"github.com/pt-arvind/gocleanarchitecture/lib/boot"
 )
 
 // main is the entrypoint for the application.

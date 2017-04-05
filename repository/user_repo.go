@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/josephspurrier/gocleanarchitecture/domain"
+import "github.com/pt-arvind/gocleanarchitecture/domain"
 
 // UserRepo represents a service for storage of users.
 type UserRepo struct {

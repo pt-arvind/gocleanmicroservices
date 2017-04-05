@@ -2,3 +2,4 @@
 db.json
 cmd/gocleanarchitecture/gocleanarchitecture
 cmd/gocleanarchitecture/gocleanarchitecture.exe
+.idea

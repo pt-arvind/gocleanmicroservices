@@ -6,12 +6,12 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/josephspurrier/gocleanarchitecture/controller"
-	"github.com/josephspurrier/gocleanarchitecture/domain"
-	"github.com/josephspurrier/gocleanarchitecture/lib/passhash"
-	"github.com/josephspurrier/gocleanarchitecture/lib/view"
-	"github.com/josephspurrier/gocleanarchitecture/repository"
-	"github.com/josephspurrier/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/controller"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
+	"github.com/pt-arvind/gocleanarchitecture/lib/view"
+	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"github.com/pt-arvind/gocleanarchitecture/usecase"
 )
 
 // TestLoginIndex ensures the index function returns a 200 code.

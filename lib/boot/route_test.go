@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/josephspurrier/gocleanarchitecture/lib/boot"
+	"github.com/pt-arvind/gocleanarchitecture/lib/boot"
 )
 
 // TestRoutes ensures each of the routes is set up properly.

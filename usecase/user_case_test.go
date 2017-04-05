@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
-	"github.com/josephspurrier/gocleanarchitecture/lib/passhash"
-	"github.com/josephspurrier/gocleanarchitecture/repository"
-	"github.com/josephspurrier/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
+	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"github.com/pt-arvind/gocleanarchitecture/usecase"
 )
 
 //  BadHasher represents a password hashing system that always fails.

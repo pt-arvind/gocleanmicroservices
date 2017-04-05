@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"path"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
 )
 
 // Item represents a view template.

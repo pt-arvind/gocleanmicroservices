@@ -1,11 +1,11 @@
 package boot
 
 import (
-	"github.com/josephspurrier/gocleanarchitecture/domain"
-	"github.com/josephspurrier/gocleanarchitecture/lib/passhash"
-	"github.com/josephspurrier/gocleanarchitecture/lib/view"
-	"github.com/josephspurrier/gocleanarchitecture/repository"
-	"github.com/josephspurrier/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
+	"github.com/pt-arvind/gocleanarchitecture/lib/view"
+	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"github.com/pt-arvind/gocleanarchitecture/usecase"
 )
 
 // Service represents all the services that the application uses.

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
 )
 
 // RegisterHandler represents the services required for this controller.

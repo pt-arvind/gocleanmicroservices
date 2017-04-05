@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
 )
 
 // MockService represents a service for managing users.

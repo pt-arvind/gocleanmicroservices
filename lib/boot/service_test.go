@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
-	"github.com/josephspurrier/gocleanarchitecture/lib/boot"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/lib/boot"
 )
 
 // TestRegisterServices ensures each of the services is set up properly.

@@ -3,8 +3,8 @@ package repository_test
 import (
 	"testing"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
-	"github.com/josephspurrier/gocleanarchitecture/repository"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/repository"
 )
 
 // TestUserRepo tests the user repo.

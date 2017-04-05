@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/josephspurrier/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
 )
 
 // Schema represents the database structure.

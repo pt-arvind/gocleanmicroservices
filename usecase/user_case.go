@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/josephspurrier/gocleanarchitecture/domain"
+import "github.com/pt-arvind/gocleanarchitecture/domain"
 
 // UserCase represents a service for managing users.
 type UserCase struct {
