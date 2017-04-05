@@ -71,9 +71,9 @@ type Controller struct {
 //	ctx context.Context
 //}
 
-// potentially use a struct to encapsulate http.ResponseWriter and http.Request in interfaces that you would then pass around
-type Request struct {
-
+//TODO: not the best spot to put this
+type Connection struct {
+	Request *http.Request
 	Writer PresenterOutput
 }
 
@@ -87,14 +87,16 @@ type ViewModel struct {
 
 // Index displays the logon screen.
 func (h *Controller) Index(w http.ResponseWriter, r *http.Request) {
+
+	connection := Connection{Request: r, Writer: w}
 	// Handle 404.
 	if r.URL.Path != "/" { // FIXME: will typically be handled by a router, so it's OK for this logic to be in here for now
-		h.Interactor.Request404(w,r)
+		h.Interactor.Request404(connection)
 	} else if r.Method == "POST" { 	// FIXME: will typically be handled by a router, so it's OK for this logic to be in here for now
 		// call store on interactor
-		h.Interactor.RequestStore(w,r)
+		h.Interactor.RequestStore(connection)
 	} else {
-		h.Interactor.RequestIndex(w,r)
+		h.Interactor.RequestIndex(connection)
 	}
 }
 
