@@ -6,7 +6,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/controller"
+	//"github.com/pt-arvind/gocleanarchitecture/controller"
+	"github.com/pt-arvind/gocleanarchitecture/login"
 	"github.com/pt-arvind/gocleanarchitecture/domain"
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
@@ -24,7 +25,7 @@ func TestLoginIndex(t *testing.T) {
 	}
 
 	// Call the handler.
-	h := new(controller.LoginHandler)
+	h := new(login.Controller)
 	h.ViewService = view.New("../view", "tmpl")
 	h.Index(w, r)
 
@@ -42,7 +43,7 @@ func TestLoginStoreMissingRequiredFields(t *testing.T) {
 	}
 
 	// Call the handler.
-	h := new(controller.LoginHandler)
+	h := new(login.Controller)
 	h.UserService = usecase.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
@@ -69,7 +70,7 @@ func TestLoginStoreAuthenticateOK(t *testing.T) {
 	r.Form.Add("password", "Pa$$w0rd")
 
 	// Call the handler.
-	h := new(controller.LoginHandler)
+	h := new(login.Controller)
 	h.UserService = usecase.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
@@ -103,7 +104,7 @@ func TestLoginStoreAuthenticateFail(t *testing.T) {
 	r.Form.Add("password", "BadPa$$w0rd")
 
 	// Call the handler.
-	h := new(controller.LoginHandler)
+	h := new(login.Controller)
 	h.UserService = usecase.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
