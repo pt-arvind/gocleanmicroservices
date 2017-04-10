@@ -5,12 +5,12 @@ import (
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
 	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
 )
 
 // Service represents all the services that the application uses.
 type Service struct {
-	UserService domain.UserCase
+	UserService logic.UserInteractor
 	ViewService domain.ViewCase
 }
 
@@ -23,7 +23,7 @@ func RegisterServices() *Service {
 	db := repository.NewClient("db.json")
 
 	// Store all the services for the application.
-	s.UserService = usecase.NewUserCase(
+	s.UserService = *logic.NewInteractor(
 		repository.NewUserRepo(db),
 		new(passhash.Item))
 	s.ViewService = view.New("../../view", "tmpl")

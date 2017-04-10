@@ -12,7 +12,7 @@ import (
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
 	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
 )
 
 // TestLoginIndex ensures the index function returns a 200 code.
@@ -44,7 +44,7 @@ func TestLoginStoreMissingRequiredFields(t *testing.T) {
 
 	// Call the handler.
 	h := new(login.Controller)
-	h.UserService = usecase.NewUserCase(
+	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")
@@ -71,7 +71,7 @@ func TestLoginStoreAuthenticateOK(t *testing.T) {
 
 	// Call the handler.
 	h := new(login.Controller)
-	h.UserService = usecase.NewUserCase(
+	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")
@@ -105,7 +105,7 @@ func TestLoginStoreAuthenticateFail(t *testing.T) {
 
 	// Call the handler.
 	h := new(login.Controller)
-	h.UserService = usecase.NewUserCase(
+	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")

@@ -3,51 +3,47 @@ package login
 import (
 	"net/http"
 	"fmt"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
 	"github.com/pt-arvind/gocleanarchitecture/domain"
 )
 
 type PresenterInput interface {
-	Present404(conn Connection)
-	Present400(conn Connection)
-	Present401(conn Connection)
-	PresentSuccessfulLogin(conn Connection)
-	PresentIndex(conn Connection)
+	//Present404(conn Connection)
+	//Present400(conn Connection)
+	//Present401(conn Connection)
+	//PresentSuccessfulLogin(conn Connection)
+	//PresentIndex(conn Connection)
+	logic.UserInteractorOutput
 }
 
 // should be functionally equivalent to http.ResponseWriter
 type PresenterOutput interface {
-	Header() http.Header
-	Write([]byte) (int, error)
-	WriteHeader(int)
+	http.ResponseWriter
 }
 
 type Presenter struct {
-	//Output http.ResponseWriter
-	ViewService domain.ViewCase
+	Output domain.ViewCase //TODO: should not be in domain
+	Connection Connection // ugh :(
 }
 
-func (presenter *Presenter) Present400(conn Connection) {
-	conn.Writer.WriteHeader(http.StatusBadRequest)
-	fmt.Fprint(conn.Writer, `<html>One or more required fields are missing. `+
-		 	 `Click <a href="/">here</a> to try again.</html>`) // ideally you'd have a template file here and set a view model in the vars but for such a simple example, it's omitted
+func (presenter *Presenter) Error(err error) {
+	fmt.Fprint(presenter.Connection.Writer, "<html>Error!</html>")
 }
 
-func (presenter *Presenter) Present401(conn Connection) {
-	conn.Writer.WriteHeader(http.StatusUnauthorized)
-	fmt.Fprint(conn.Writer, `<html>Login failed. `+
-			 `Click <a href="/">here</a> to try again.</html>`)// ideally you'd have a template file here and set a view model in the vars but for such a simple example, it's omitted
+func (presenter *Presenter) Authenticated(user domain.User) {
+	fmt.Fprint(presenter.Connection.Writer, "<html>Login successful!</html>")
 }
 
-func (presenter *Presenter) Present404(conn Connection) {
-	conn.Writer.WriteHeader(http.StatusNotFound)
-	fmt.Fprint(conn.Writer, "404 Page Not Found") // ideally you'd have a template file here and set a view model in the vars but for such a simple example, it's omitted
+func (presenter *Presenter) UserCreated(user domain.User) {
+	panic("shouldnt get called")
 }
 
-func (presenter *Presenter) PresentSuccessfulLogin(conn Connection) {
-	fmt.Fprint(conn.Writer, "<html>Login successful!</html>")
+func (presenter *Presenter) UserRetrieved(user domain.User) {
+	panic("shouldnt get called")
 }
 
-func (presenter *Presenter) PresentIndex(conn Connection) {
-	presenter.ViewService.SetTemplate("login/index")
-	presenter.ViewService.Render(conn.Writer, conn.Request)
+func (presenter *Presenter) Index() {
+	presenter.Output.SetTemplate("login/index")
+	presenter.Output.Render(presenter.Connection.Writer, presenter.Connection.Request)
 }
+

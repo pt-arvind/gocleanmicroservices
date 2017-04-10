@@ -26,50 +26,62 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	controller := new(login.Controller)
 
 	// Assign services.
-	//controller.UserService = s.UserService
+	//controller.UserInteractor = s.UserInteractor
 	//controller.ViewService = s.ViewService
 
 
-	interactor := new(login.Interactor)
-	interactor.UserService = s.UserService
+	//interactor := new(login.Interactor)
+	//interactor.UserInteractor = s.UserService
 
 
 	presenter := new(login.Presenter)
-	presenter.ViewService = s.ViewService
+	presenter.Output = s.ViewService
 
 	// hook up the flow, interactor -> presenter
-	interactor.Output = presenter
+	s.UserService.SetOutput(presenter)
 
 	// controller -> interactor
-	controller.Output = interactor
+	controller.Output = s.UserService
+	controller.Presenter = *presenter // :( this is so that we can set the connection on the presenter as it passes through
 
 
 	// Load routes.
-	mux.HandleFunc("/", controller.Index)
+	mux.HandleFunc("/", controller.Route)
 }
 
 // AddRegister registers the register handlers.
 func (s *Service) AddRegister(mux *http.ServeMux) {
 	// Create handler.
-	controller := new(register.Controller)
+	//controller := new(register.Controller)
+	//
+	//interactor := new(register.Interactor)
+	//interactor.UserService = s.UserService
+	//
+	//
+	//presenter := new(register.Presenter)
+	//presenter.ViewService = s.ViewService
+	//
+	//// hook up the flow, interactor -> presenter
+	//interactor.Output = presenter
+	//
+	//// controller -> interactor
+	//controller.Output = interactor
 
-	interactor := new(register.Interactor)
-	interactor.UserService = s.UserService
+	controller := new(register.Controller)
+	controller.Output = s.UserService
 
 
 	presenter := new(register.Presenter)
-	presenter.ViewService = s.ViewService
+	presenter.Output = s.ViewService
 
-	// hook up the flow, interactor -> presenter
-	interactor.Output = presenter
+	s.UserService.SetOutput(presenter)
+	controller.Presenter = *presenter
 
-	// controller -> interactor
-	controller.Output = interactor
 
 	// Assign services.
-	//h.UserService = s.UserService
+	//h.UserInteractor = s.UserInteractor
 	//h.ViewService = s.ViewService
 
 	// Load routes.
-	mux.HandleFunc("/register", controller.Index)
+	mux.HandleFunc("/register", controller.Route)
 }

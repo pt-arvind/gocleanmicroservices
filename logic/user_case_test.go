@@ -1,4 +1,4 @@
-package usecase_test
+package logic_test
 
 import (
 	"errors"
@@ -7,7 +7,7 @@ import (
 	"github.com/pt-arvind/gocleanarchitecture/domain"
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
 )
 
 //  BadHasher represents a password hashing system that always fails.
@@ -26,7 +26,7 @@ func (s *BadHasher) Match(hash, password string) bool {
 // TestCreateUser ensures user can be created.
 func TestCreateUser(t *testing.T) {
 	// Test user creation.
-	s := usecase.NewUserCase(repository.NewUserRepo(new(repository.MockService)),
+	s := logic.NewUserCase(repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	u := new(domain.User)
 	u.Email = "jdoe@example.com"
@@ -51,7 +51,7 @@ func TestCreateUser(t *testing.T) {
 // TestAuthenticate ensures user can authenticate.
 func TestAuthenticate(t *testing.T) {
 	// Test user creation.
-	s := usecase.NewUserCase(repository.NewUserRepo(new(repository.MockService)),
+	s := logic.NewUserCase(repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	u := new(domain.User)
 	u.Email = "ssmith@example.com"
@@ -78,7 +78,7 @@ func TestAuthenticate(t *testing.T) {
 func TestUserFailures(t *testing.T) {
 	// Test user creation.
 	db := new(repository.MockService)
-	s := usecase.NewUserCase(repository.NewUserRepo(db), new(passhash.Item))
+	s := logic.NewUserCase(repository.NewUserRepo(db), new(passhash.Item))
 
 	db.WriteFail = true
 	db.ReadFail = true
@@ -107,7 +107,7 @@ func TestUserFailures(t *testing.T) {
 func TestBadHasherFailures(t *testing.T) {
 	// Test user creation.
 	db := new(repository.MockService)
-	s := usecase.NewUserCase(repository.NewUserRepo(db), new(BadHasher))
+	s := logic.NewUserCase(repository.NewUserRepo(db), new(BadHasher))
 
 	u := new(domain.User)
 	u.Email = "ssmith@example.com"

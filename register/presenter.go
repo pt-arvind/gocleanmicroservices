@@ -15,33 +15,31 @@ type PresenterInput interface {
 
 // should be functionally equivalent to http.ResponseWriter
 type PresenterOutput interface {
-	Header() http.Header
-	Write([]byte) (int, error)
-	WriteHeader(int)
+	http.ResponseWriter
 }
 
 type Presenter struct {
-	ViewService domain.ViewCase
+	Output domain.ViewCase //TODO: should not be in domain
+	Connection Connection // ugh :(
 }
 
-func (presenter *Presenter) PresentIndex(conn Connection) {
-	presenter.ViewService.SetTemplate("register/index")
-	presenter.ViewService.Render(conn.Writer, conn.Request)
+func (presenter *Presenter) Error(err error) {
+	fmt.Fprint(presenter.Connection.Writer, "<html>Error!</html>")
 }
 
-func (presenter *Presenter) Present400(conn Connection) {
-	conn.Writer.WriteHeader(http.StatusBadRequest)
-	fmt.Fprint(conn.Writer, `<html>One or more required fields are missing. `+
-				`Click <a href="/register">here</a> to try again.</html>`)
+func (presenter *Presenter) Authenticated(user domain.User) {
+	panic("shouldnt get called")
 }
 
-func (presenter *Presenter) Present500(conn Connection, err error) {
-	conn.Writer.WriteHeader(http.StatusInternalServerError)
-	fmt.Fprint(conn.Writer, err)
+func (presenter *Presenter) UserCreated(user domain.User) {
+	fmt.Fprint(presenter.Connection.Writer, "<html>User Creation successful!</html>")
 }
 
-func (presenter *Presenter) PresentSuccessfulUserCreation(conn Connection) {
-	conn.Writer.WriteHeader(http.StatusCreated)
-	fmt.Fprint(conn.Writer, `<html>User created. `+
-				`Click <a href="/">here</a> to login.</html>`)
+func (presenter *Presenter) UserRetrieved(user domain.User) {
+	fmt.Fprint(presenter.Connection.Writer, "<html>User retrieve successful!</html>")
+}
+
+func (presenter *Presenter) Index() {
+	presenter.Output.SetTemplate("register/index")
+	presenter.Output.Render(presenter.Connection.Writer, presenter.Connection.Request)
 }

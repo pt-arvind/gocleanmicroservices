@@ -10,7 +10,7 @@ import (
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
 	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/usecase"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
 )
 
 // TestRegisterIndex ensures the index function returns a 200 code.
@@ -50,7 +50,7 @@ func TestRegisterStoreCreateOK(t *testing.T) {
 
 	// Call the handler.
 	h := new(controller.RegisterHandler)
-	h.UserService = usecase.NewUserCase(
+	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")
@@ -76,7 +76,7 @@ func TestRegisterStoreCreateNoFieldFail(t *testing.T) {
 
 	// Call the handler.
 	h := new(controller.RegisterHandler)
-	h.UserService = usecase.NewUserCase(
+	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")
@@ -106,7 +106,7 @@ func TestRegisterStoreCreateOneMissingFieldFail(t *testing.T) {
 
 	// Call the handler.
 	h := new(controller.RegisterHandler)
-	h.UserService = usecase.NewUserCase(
+	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")

@@ -2,10 +2,13 @@ package login
 
 import (
 	"net/http"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"errors"
 )
 
 type Controller struct {
-	Output  	InteractorInput
+	Output  	logic.UserInteractorInput
+	Presenter	Presenter
 }
 
 //TODO: not the best spot to put this
@@ -14,25 +17,61 @@ type Connection struct {
 	Writer PresenterOutput
 }
 
-type ViewModel struct {
-
-}
-
 
 // Index displays the logon screen.
-func (controller *Controller) Index(w http.ResponseWriter, r *http.Request) {
-	connection := Connection{Request: r, Writer: w}
-	// Handle 404.
-	if r.URL.Path != "/" { // FIXME: will typically be handled by a router, so it's OK for this logic to be in here for now
-		controller.Output.Request404(connection)
-	} else if r.Method == "POST" { 	// FIXME: will typically be handled by a router, so it's OK for this logic to be in here for now
-		// call store on interactor
-		controller.Output.RequestStore(connection)
+func (controller *Controller) Route(writer http.ResponseWriter, request *http.Request) {
+
+	// set connection on presenter :(
+	// TODO: would love a better solution than this...
+	controller.Presenter.Connection = Connection{Writer: writer, Request: request}
+
+
+	if request.URL.Path != "/" {
+		controller.error404(writer,request)
+	} else if request.Method == "POST" {
+		controller.authenticate(writer,request)
 	} else {
-		controller.Output.RequestIndex(connection)
+		controller.index(writer,request)
 	}
 }
 
+func (controller *Controller) error404(writer http.ResponseWriter, request *http.Request) {
+	controller.Output.Error(errors.New("404"))
+}
+
+func (controller *Controller) index(writer http.ResponseWriter, request *http.Request) {
+	controller.Output.Index()
+}
+
 // Store handles the submission of the login information.
-//func (h *Controller) Store(w http.ResponseWriter, r *http.Request) {
-//}
+func (controller *Controller) authenticate(writer http.ResponseWriter, request *http.Request) {
+	// call store on interactor
+	//controller.Output.RequestStore(connection)
+
+
+	// validation of this level should honestly take place in javascript or prior to even getting here!
+	//for _, v := range []string{"email", "password"} {
+	//	if len(conn.Request.FormValue(v)) == 0 {
+	//		interactor.Output.Present400(conn)
+	//		return
+	//	}
+	//}
+
+
+	//user := new(domain.User)
+
+
+	email := request.FormValue("email")
+	password := request.FormValue("password")
+
+	//err := interactor.UserInteractor.Authenticate(user)
+
+	//if err != nil {
+	//	interactor.Output.Present401(conn) //realistically would probably pass that error along
+	//} else {
+	//	interactor.Output.PresentSuccessfulLogin(conn) // realistically, you'd want to have something here that would pass along the user you just made
+	//}
+
+	controller.Output.Authenticate(email, password)
+
+}
