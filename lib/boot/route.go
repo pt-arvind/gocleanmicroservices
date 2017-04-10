@@ -33,15 +33,16 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	//interactor := new(login.Interactor)
 	//interactor.UserInteractor = s.UserService
 
+	interactor := s.UserService
 
 	presenter := new(login.Presenter)
 	presenter.Output = s.ViewService
 
 	// hook up the flow, interactor -> presenter
-	s.UserService.SetOutput(presenter)
+	interactor.SetOutput(presenter)
 
 	// controller -> interactor
-	controller.Output = s.UserService
+	controller.Output = interactor
 	controller.Presenter = *presenter // :( this is so that we can set the connection on the presenter as it passes through
 
 
@@ -67,14 +68,16 @@ func (s *Service) AddRegister(mux *http.ServeMux) {
 	//// controller -> interactor
 	//controller.Output = interactor
 
+	interactor := s.UserService
+
 	controller := new(register.Controller)
-	controller.Output = s.UserService
+	controller.Output = interactor
 
 
 	presenter := new(register.Presenter)
 	presenter.Output = s.ViewService
 
-	s.UserService.SetOutput(presenter)
+	interactor.SetOutput(presenter)
 	controller.Presenter = *presenter
 
 
