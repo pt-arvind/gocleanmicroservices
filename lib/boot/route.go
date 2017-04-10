@@ -3,8 +3,8 @@ package boot
 import (
 	"net/http"
 
-	"github.com/pt-arvind/gocleanarchitecture/controller"
 	"github.com/pt-arvind/gocleanarchitecture/login"
+	"github.com/pt-arvind/gocleanarchitecture/register"
 )
 
 // LoadRoutes returns a handler with all the routes.
@@ -41,7 +41,7 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	interactor.Output = presenter
 
 	// controller -> interactor
-	controller.Interactor = interactor
+	controller.Output = interactor
 
 
 	// Load routes.
@@ -51,12 +51,25 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 // AddRegister registers the register handlers.
 func (s *Service) AddRegister(mux *http.ServeMux) {
 	// Create handler.
-	h := new(controller.RegisterHandler)
+	controller := new(register.Controller)
+
+	interactor := new(register.Interactor)
+	interactor.UserService = s.UserService
+
+
+	presenter := new(register.Presenter)
+	presenter.ViewService = s.ViewService
+
+	// hook up the flow, interactor -> presenter
+	interactor.Output = presenter
+
+	// controller -> interactor
+	controller.Output = interactor
 
 	// Assign services.
-	h.UserService = s.UserService
-	h.ViewService = s.ViewService
+	//h.UserService = s.UserService
+	//h.ViewService = s.ViewService
 
 	// Load routes.
-	mux.HandleFunc("/register", h.Index)
+	mux.HandleFunc("/register", controller.Index)
 }
