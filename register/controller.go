@@ -64,6 +64,11 @@ func (controller *Controller) createUser(writer http.ResponseWriter, request *ht
 	email := request.FormValue("email")
 	password := request.FormValue("password")
 
+	//fmt.Println(firstname)
+	//fmt.Println(lastname)
+	//fmt.Println(email)
+	//fmt.Println(password)
+
 	// Add the user to the database.
 	//err := interactor.UserService.CreateUser(u)
 

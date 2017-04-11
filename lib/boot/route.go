@@ -4,9 +4,8 @@ import (
 	"net/http"
 
 	"github.com/pt-arvind/gocleanarchitecture/login"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
 	"github.com/pt-arvind/gocleanarchitecture/register"
-	"reflect"
+	//"fmt"
 )
 
 // LoadRoutes returns a handler with all the routes.
@@ -38,11 +37,13 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	//:_(
 	userService := s.UserService
 
-	val := reflect.ValueOf(userService)
-	if val.Kind() == reflect.Ptr {
-		val = reflect.Indirect(val)
-	}
-	interactor := reflect.New(val.Type()).Interface().(logic.UserInteractorInput)
+	//val := reflect.ValueOf(userService)
+	//if val.Kind() == reflect.Ptr {
+	//	val = reflect.Indirect(val)
+	//}
+	//interactor := reflect.New(val.Type()).Interface().(logic.UserInteractorInput)
+
+	interactor := userService.NewUseCaseInteractor()
 
 	presenter := new(login.Presenter)
 	presenter.Output = s.ViewService
@@ -81,11 +82,38 @@ func (s *Service) AddRegister(mux *http.ServeMux) {
 	// CAUTION: this stuff has to be set up in this way because of pass-by-value vs pass-by-reference semantics!
 	userService := s.UserService
 
-	val := reflect.ValueOf(userService)
-	if val.Kind() == reflect.Ptr {
-		val = reflect.Indirect(val)
-	}
-	interactor := reflect.New(val.Type()).Interface().(logic.UserInteractorInput)
+	//val := reflect.ValueOf(userService)
+	//fmt.Println(val)
+	//fmt.Println(reflect.ValueOf(val))
+	//
+	//
+	//if val.Kind() == reflect.Ptr {
+	//	val = reflect.Indirect(val)
+	//}
+	//fmt.Println("=============================================")
+	//fmt.Println(userService)
+	//fmt.Println(val)
+	//fmt.Println(val.Type())
+	//fmt.Println(reflect.ValueOf(val))
+	//fmt.Println("interface time")
+	//fmt.Println(reflect.ValueOf(val).Interface())
+	//
+	//cval := reflect.ValueOf(val)
+	//nval := cval.Interface()
+	//
+	//fmt.Println(nval)
+	//
+	//
+	////var _ logic.UserInteractorInput = (*logic.UserInteractor)(nil) // compiles because logic.UserInteractor conforms to UserInteractorInput....
+	//
+	//aval := &logic.UserInteractor{}
+	//var bval logic.UserInteractorInput = aval
+	//
+	//fmt.Println(bval)
+
+
+	interactor := userService.NewUseCaseInteractor() //(reflect.ValueOf(val).Interface()).(logic.UserInteractorInput)//reflect.New(val.Type()).Interface().(logic.UserInteractorInput)
+	//fmt.Println(interactor)
 
 	controller := new(register.Controller)
 

@@ -6,6 +6,7 @@ import (
 
 // UserInteractor represents a service for managing users.
 type UserInteractorInput interface {
+
 	SetOutput(output UserInteractorOutput)
 	Error(err error)
 	// Authenticate outputs an error if the email and password don't match.
@@ -31,9 +32,23 @@ type UserInteractor struct {
 	output 	 UserInteractorOutput
 }
 
+type UserInteractorFactory struct {
+	userRepo domain.UserRepo
+	passhash domain.PasshashCase
+}
+
+func (factory UserInteractorFactory) NewUseCaseInteractor() UserInteractorInput {
+	interactor := new(UserInteractor)
+	interactor.userRepo = factory.userRepo
+	interactor.passhash = factory.passhash
+
+	return interactor
+}
+
+
 // NewUserCase returns the service for managing users.
-func NewInteractor(repo domain.UserRepo, passhash domain.PasshashCase) *UserInteractor {
-	s := new(UserInteractor)
+func NewInteractorFactory(repo domain.UserRepo, passhash domain.PasshashCase) *UserInteractorFactory {
+	s := new(UserInteractorFactory)
 	s.userRepo = repo
 	s.passhash = passhash
 	return s
@@ -89,7 +104,9 @@ func (interactor *UserInteractor) User(email string) {
 
 // CreateUser creates a new user.
 func (interactor *UserInteractor) CreateUser(firstName string, lastName string, email string, password string) {
+
 	_, err := interactor.userRepo.FindByEmail(email)
+
 	if err == nil {
 		//return domain.ErrUserAlreadyExist
 		interactor.output.Error(domain.ErrUserAlreadyExist)
@@ -98,15 +115,18 @@ func (interactor *UserInteractor) CreateUser(firstName string, lastName string, 
 
 
 	passNew, err := interactor.passhash.Hash(password)
+
 	if err != nil {
 		//return domain.ErrPasswordHash
 		interactor.output.Error(domain.ErrPasswordHash)
 		return
 	}
 
+
 	// Swap the password.
 	passOld := password
 	item := &domain.User{FirstName: firstName, LastName: lastName, Email: email, Password: passNew}
+
 
 	err = interactor.userRepo.Store(item)
 
@@ -117,6 +137,7 @@ func (interactor *UserInteractor) CreateUser(firstName string, lastName string, 
 		interactor.output.Error(err)
 		return
 	}
+
 	interactor.output.UserCreated(*item)
 	//return err
 }

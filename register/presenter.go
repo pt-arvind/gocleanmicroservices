@@ -24,6 +24,7 @@ type Presenter struct {
 }
 
 func (presenter *Presenter) Error(err error) {
+	//fmt.Println("ERROR")
 	fmt.Fprint(presenter.Connection.Writer, "<html>Error!</html>")
 }
 
@@ -32,14 +33,17 @@ func (presenter *Presenter) Authenticated(user domain.User) {
 }
 
 func (presenter *Presenter) UserCreated(user domain.User) {
+	//fmt.Println("CREATED!")
 	fmt.Fprint(presenter.Connection.Writer, "<html>User Creation successful!</html>")
 }
 
 func (presenter *Presenter) UserRetrieved(user domain.User) {
+	//fmt.Println("RETRIEVED!")
 	fmt.Fprint(presenter.Connection.Writer, "<html>User retrieve successful!</html>")
 }
 
 func (presenter *Presenter) Index() {
+	//fmt.Println("INDEX")
 	presenter.Output.SetTemplate("register/index")
 	presenter.Output.Render(presenter.Connection.Writer, presenter.Connection.Request)
 }

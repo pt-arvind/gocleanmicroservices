@@ -10,7 +10,7 @@ import (
 
 // Service represents all the services that the application uses.
 type Service struct {
-	UserService logic.UserInteractorInput
+	UserService logic.UserInteractorFactory
 	ViewService domain.ViewCase
 }
 
@@ -23,7 +23,7 @@ func RegisterServices() *Service {
 	db := repository.NewClient("db.json")
 
 	// Store all the services for the application.
-	s.UserService = logic.NewInteractor(
+	s.UserService = *logic.NewInteractorFactory(
 		repository.NewUserRepo(db),
 		new(passhash.Item))
 	s.ViewService = view.New("../../view", "tmpl")
