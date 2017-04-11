@@ -4,7 +4,9 @@ import (
 	"net/http"
 
 	"github.com/pt-arvind/gocleanarchitecture/login"
+	"github.com/pt-arvind/gocleanarchitecture/logic"
 	"github.com/pt-arvind/gocleanarchitecture/register"
+	"reflect"
 )
 
 // LoadRoutes returns a handler with all the routes.
@@ -33,7 +35,14 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	//interactor := new(login.Interactor)
 	//interactor.UserInteractor = s.UserService
 
-	interactor := s.UserService
+	//:_(
+	userService := s.UserService
+
+	val := reflect.ValueOf(userService)
+	if val.Kind() == reflect.Ptr {
+		val = reflect.Indirect(val)
+	}
+	interactor := reflect.New(val.Type()).Interface().(logic.UserInteractorInput)
 
 	presenter := new(login.Presenter)
 	presenter.Output = s.ViewService
@@ -43,7 +52,7 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 
 	// controller -> interactor
 	controller.Output = interactor
-	controller.Presenter = *presenter // :( this is so that we can set the connection on the presenter as it passes through
+	controller.Presenter = presenter // :( this is so that we can set the connection on the presenter as it passes through
 
 
 	// Load routes.
@@ -68,17 +77,25 @@ func (s *Service) AddRegister(mux *http.ServeMux) {
 	//// controller -> interactor
 	//controller.Output = interactor
 
-	interactor := s.UserService
+
+	// CAUTION: this stuff has to be set up in this way because of pass-by-value vs pass-by-reference semantics!
+	userService := s.UserService
+
+	val := reflect.ValueOf(userService)
+	if val.Kind() == reflect.Ptr {
+		val = reflect.Indirect(val)
+	}
+	interactor := reflect.New(val.Type()).Interface().(logic.UserInteractorInput)
 
 	controller := new(register.Controller)
-	controller.Output = interactor
-
 
 	presenter := new(register.Presenter)
 	presenter.Output = s.ViewService
 
 	interactor.SetOutput(presenter)
-	controller.Presenter = *presenter
+
+	controller.Output = interactor
+	controller.Presenter = presenter
 
 
 	// Assign services.

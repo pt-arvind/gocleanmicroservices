@@ -1,6 +1,8 @@
 package logic
 
-import "github.com/pt-arvind/gocleanarchitecture/domain"
+import (
+	"github.com/pt-arvind/gocleanarchitecture/domain"
+)
 
 // UserInteractor represents a service for managing users.
 type UserInteractorInput interface {

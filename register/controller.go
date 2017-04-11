@@ -25,7 +25,7 @@ type Connection struct {
 
 type Controller struct {
 	Output  	logic.UserInteractorInput
-	Presenter	Presenter
+	Presenter	*Presenter
 }
 
 

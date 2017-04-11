@@ -8,7 +8,7 @@ import (
 
 type Controller struct {
 	Output  	logic.UserInteractorInput
-	Presenter	Presenter
+	Presenter	*Presenter
 }
 
 //TODO: not the best spot to put this
@@ -25,9 +25,9 @@ func (controller *Controller) Route(writer http.ResponseWriter, request *http.Re
 	// TODO: would love a better solution than this...
 	controller.Presenter.Connection = Connection{Writer: writer, Request: request}
 
-
 	if request.URL.Path != "/" {
 		controller.error404(writer,request)
+
 	} else if request.Method == "POST" {
 		controller.authenticate(writer,request)
 	} else {
