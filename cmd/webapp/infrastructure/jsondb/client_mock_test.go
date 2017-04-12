@@ -1,4 +1,4 @@
-package repository_test
+package jsondb_test
 
 import (
 	"testing"

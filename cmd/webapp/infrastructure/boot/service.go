@@ -4,7 +4,8 @@ import (
 	"github.com/pt-arvind/gocleanarchitecture/domain"
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
-	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/jsondb"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/repository"
 	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 )
 
@@ -20,7 +21,7 @@ func RegisterServices() *Service {
 	s := new(Service)
 
 	// Initialize the clients.
-	db := repository.NewClient("db.json")
+	db := jsondb.NewClient("db.json")
 
 	// Store all the services for the application.
 	s.UserService = *logic.NewInteractorFactory(

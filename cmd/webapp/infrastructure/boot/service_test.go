@@ -5,7 +5,8 @@ import (
 	"testing"
 
 	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/lib/boot"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/boot"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 )
 
 // TestRegisterServices ensures each of the services is set up properly.

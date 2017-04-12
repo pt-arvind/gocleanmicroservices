@@ -1,4 +1,4 @@
-package repository
+package jsondb
 
 import (
 	"encoding/json"
@@ -21,14 +21,6 @@ type Client struct {
 
 	data  *Schema
 	mutex sync.RWMutex
-}
-
-// Service represents a service for interacting with the database.
-type Service interface {
-	Read() error
-	Write() error
-	Records() []domain.User
-	AddRecord(domain.User)
 }
 
 // NewClient returns a new database client.

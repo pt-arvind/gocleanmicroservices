@@ -2,6 +2,14 @@ package repository
 
 import "github.com/pt-arvind/gocleanarchitecture/domain"
 
+// Service represents a service for interacting with the database.
+type Service interface {
+	Read() error
+	Write() error
+	Records() []domain.User
+	AddRecord(domain.User)
+}
+
 // UserRepo represents a service for storage of users.
 type UserRepo struct {
 	client Service
@@ -31,7 +39,7 @@ func (s *UserRepo) FindByEmail(email string) (*domain.User, error) {
 		}
 	}
 
-	return item, domain.ErrUserNotFound
+	return item, domain.ErrUserNotFound //TODO: should not be domain
 }
 
 // Store adds a user.
