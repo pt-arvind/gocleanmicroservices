@@ -12,7 +12,7 @@ var (
 )
 
 // User represents a user of the system.
-type User struct {
+type User struct { //FIXME: should not have json tags in here
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
 	Email     string `json:"email"`

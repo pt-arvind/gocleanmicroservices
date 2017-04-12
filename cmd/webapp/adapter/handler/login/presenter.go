@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
+
 )
 
 type PresenterInput interface {
@@ -22,7 +24,7 @@ type PresenterOutput interface {
 }
 
 type Presenter struct {
-	Output domain.ViewCase //TODO: should not be in domain
+	Output viewport.ViewCase //TODO: should not be in domain
 	Connection Connection // ugh :(
 }
 

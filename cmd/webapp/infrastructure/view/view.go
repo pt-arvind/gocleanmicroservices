@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"path"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
 	"os"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
 )
 
 // Item represents a view template.
@@ -16,7 +16,7 @@ type Item struct {
 
 	baseTemplate string
 	template     string
-	vars         domain.ViewVars
+	vars         viewport.ViewVars
 }
 
 // New returns a new template.
@@ -33,7 +33,7 @@ func New(folder string, extension string) *Item {
 	v.SetExtension(extension)
 	v.SetBaseTemplate("base")
 	v.SetTemplate("default")
-	v.SetVars(domain.ViewVars{})
+	v.SetVars(viewport.ViewVars{})
 
 
 	return v
@@ -79,7 +79,7 @@ func (v *Item) GetVar(key string) interface{} {
 }
 
 // SetVars sets the template variable map.
-func (v *Item) SetVars(vars domain.ViewVars) {
+func (v *Item) SetVars(vars viewport.ViewVars) {
 	v.vars = vars
 }
 

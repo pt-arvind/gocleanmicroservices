@@ -22,10 +22,10 @@ func (controller *Controller) Route(writer http.ResponseWriter, request *http.Re
 	controller.Presenter.Connection = Connection{Writer: writer, Request: request}
 
 	if request.Method == "POST" { //will ideally be handled by a router
-		//controller.Output.RequestStore(conn)
+		//tests(tobemoved).Output.RequestStore(conn)
 		controller.createUser(writer, request)
 	} else {
-		//controller.Output.RequestIndex(conn)
+		//tests(tobemoved).Output.RequestIndex(conn)
 		controller.index(writer, request)
 	}
 }

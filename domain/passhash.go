@@ -1,4 +1,4 @@
-package domain
+package domain //FIXME: this might or might not actually be a domain object but should be renamed
 
 import (
 	"errors"

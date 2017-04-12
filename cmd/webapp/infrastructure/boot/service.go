@@ -1,18 +1,18 @@
 package boot
 
 import (
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/view"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/passhash"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/view"
 	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/jsondb"
 	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/repository"
 	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
 )
 
 // Service represents all the services that the application uses.
 type Service struct {
 	UserService logic.UserInteractorFactory
-	ViewService domain.ViewCase
+	ViewService viewport.ViewCase
 }
 
 // RegisterServices sets up each service and returns the container for all

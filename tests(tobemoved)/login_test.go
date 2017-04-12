@@ -6,15 +6,17 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/controller"
+	//"github.com/pt-arvind/gocleanarchitecture/tests(tobemoved)"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/logic/handler/login"
+	"github.com/pt-arvind/gocleanarchitecture/domain"
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
 	"github.com/pt-arvind/gocleanarchitecture/repository"
 	"github.com/pt-arvind/gocleanarchitecture/logic"
 )
 
-// TestRegisterIndex ensures the index function returns a 200 code.
-func TestRegisterIndex(t *testing.T) {
+// TestLoginIndex ensures the index function returns a 200 code.
+func TestLoginIndex(t *testing.T) {
 	// Set up the request.
 	w := httptest.NewRecorder()
 	r, err := http.NewRequest("GET", "/", nil)
@@ -23,7 +25,7 @@ func TestRegisterIndex(t *testing.T) {
 	}
 
 	// Call the handler.
-	h := new(controller.RegisterHandler)
+	h := new(login.Controller)
 	h.ViewService = view.New("../view", "tmpl")
 	h.Index(w, r)
 
@@ -31,42 +33,8 @@ func TestRegisterIndex(t *testing.T) {
 	AssertEqual(t, w.Code, http.StatusOK)
 }
 
-// TestRegisterStoreCreateOK ensures register can be successful.
-func TestRegisterStoreCreateOK(t *testing.T) {
-	// Set up the request.
-	w := httptest.NewRecorder()
-	r, err := http.NewRequest("POST", "/", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Set the request body.
-	val := url.Values{}
-	r.Form = val
-	r.Form.Add("firstname", "John")
-	r.Form.Add("lastname", "Doe")
-	r.Form.Add("email", "jdoe@example.com")
-	r.Form.Add("password", "Pa$$w0rd")
-
-	// Call the handler.
-	h := new(controller.RegisterHandler)
-	h.UserService = logic.NewUserCase(
-		repository.NewUserRepo(new(repository.MockService)),
-		new(passhash.Item))
-	h.ViewService = view.New("../view", "tmpl")
-	h.Index(w, r)
-
-	// Check the output.
-	AssertEqual(t, w.Code, http.StatusCreated)
-
-	// Fail on duplicate creation.
-	w = httptest.NewRecorder()
-	h.Index(w, r)
-	AssertEqual(t, w.Code, http.StatusInternalServerError)
-}
-
-// TestRegisterStoreCreateNoFieldFail ensures register can fail with no fields.
-func TestRegisterStoreCreateNoFieldFail(t *testing.T) {
+// TestLoginStoreMissingRequiredField ensures required fields should be entered.
+func TestLoginStoreMissingRequiredFields(t *testing.T) {
 	// Set up the request.
 	w := httptest.NewRecorder()
 	r, err := http.NewRequest("POST", "/", nil)
@@ -75,7 +43,7 @@ func TestRegisterStoreCreateNoFieldFail(t *testing.T) {
 	}
 
 	// Call the handler.
-	h := new(controller.RegisterHandler)
+	h := new(login.Controller)
 	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
@@ -86,9 +54,8 @@ func TestRegisterStoreCreateNoFieldFail(t *testing.T) {
 	AssertEqual(t, w.Code, http.StatusBadRequest)
 }
 
-// TestRegisterStoreCreateOneMissingFieldFail ensures register can fail with one missing
-// field.
-func TestRegisterStoreCreateOneMissingFieldFail(t *testing.T) {
+// TestLoginStoreAuthenticateOK ensures login can be successful.
+func TestLoginStoreAuthenticateOK(t *testing.T) {
 	// Set up the request.
 	w := httptest.NewRecorder()
 	r, err := http.NewRequest("POST", "/", nil)
@@ -99,19 +66,58 @@ func TestRegisterStoreCreateOneMissingFieldFail(t *testing.T) {
 	// Set the request body.
 	val := url.Values{}
 	r.Form = val
-	r.Form.Add("firstname", "John")
-	//r.Form.Add("lastname", "Doe")
 	r.Form.Add("email", "jdoe@example.com")
 	r.Form.Add("password", "Pa$$w0rd")
 
 	// Call the handler.
-	h := new(controller.RegisterHandler)
+	h := new(login.Controller)
 	h.UserService = logic.NewUserCase(
 		repository.NewUserRepo(new(repository.MockService)),
 		new(passhash.Item))
 	h.ViewService = view.New("../view", "tmpl")
+
+	// Create a new user.
+	u := new(domain.User)
+	u.Email = "jdoe@example.com"
+	u.Password = "Pa$$w0rd"
+	h.UserService.CreateUser(u)
+
 	h.Index(w, r)
 
 	// Check the output.
-	AssertEqual(t, w.Code, http.StatusBadRequest)
+	AssertEqual(t, w.Code, http.StatusOK)
+}
+
+// TestLoginStoreAuthenticateFail ensures login can fail.
+func TestLoginStoreAuthenticateFail(t *testing.T) {
+	// Set up the request.
+	w := httptest.NewRecorder()
+	r, err := http.NewRequest("POST", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Set the request body.
+	val := url.Values{}
+	r.Form = val
+	r.Form.Add("email", "jdoe2@example.com")
+	r.Form.Add("password", "BadPa$$w0rd")
+
+	// Call the handler.
+	h := new(login.Controller)
+	h.UserService = logic.NewUserCase(
+		repository.NewUserRepo(new(repository.MockService)),
+		new(passhash.Item))
+	h.ViewService = view.New("../view", "tmpl")
+
+	// Create a new user.
+	u := new(domain.User)
+	u.Email = "jdoe2@example.com"
+	u.Password = "Pa$$w0rd"
+	h.UserService.CreateUser(u)
+
+	h.Index(w, r)
+
+	// Check the output.
+	AssertEqual(t, w.Code, http.StatusUnauthorized)
 }

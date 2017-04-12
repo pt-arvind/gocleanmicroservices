@@ -1,4 +1,4 @@
-package repository_test
+package controller_test
 
 import "testing"
 

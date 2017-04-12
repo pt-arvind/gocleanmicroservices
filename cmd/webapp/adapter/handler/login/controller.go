@@ -46,7 +46,7 @@ func (controller *Controller) index(writer http.ResponseWriter, request *http.Re
 // Store handles the submission of the login information.
 func (controller *Controller) authenticate(writer http.ResponseWriter, request *http.Request) {
 	// call store on interactor
-	//controller.Output.RequestStore(connection)
+	//tests(tobemoved).Output.RequestStore(connection)
 
 
 	// validation of this level should honestly take place in javascript or prior to even getting here!

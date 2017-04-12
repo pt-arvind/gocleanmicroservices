@@ -3,6 +3,7 @@ package register
 import (
 	"net/http"
 	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
 	"fmt"
 )
 
@@ -19,7 +20,7 @@ type PresenterOutput interface {
 }
 
 type Presenter struct {
-	Output domain.ViewCase //TODO: should not be in domain
+	Output viewport.ViewCase //TODO: should not be in domain
 	Connection Connection // ugh :(
 }
 

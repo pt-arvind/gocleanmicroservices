@@ -27,8 +27,8 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	controller := new(login.Controller)
 
 	// Assign services.
-	//controller.UserInteractor = s.UserInteractor
-	//controller.ViewService = s.ViewService
+	//tests(tobemoved).UserInteractor = s.UserInteractor
+	//tests(tobemoved).ViewService = s.ViewService
 
 
 	//interactor := new(login.Interactor)
@@ -51,7 +51,7 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 	// hook up the flow, interactor -> presenter
 	interactor.SetOutput(presenter)
 
-	// controller -> interactor
+	// tests(tobemoved) -> interactor
 	controller.Output = interactor
 	controller.Presenter = presenter // :( this is so that we can set the connection on the presenter as it passes through
 
@@ -63,7 +63,7 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 // AddRegister registers the register handlers.
 func (s *Service) AddRegister(mux *http.ServeMux) {
 	// Create handler.
-	//controller := new(register.Controller)
+	//tests(tobemoved) := new(register.Controller)
 	//
 	//interactor := new(register.Interactor)
 	//interactor.UserService = s.UserService
@@ -75,8 +75,8 @@ func (s *Service) AddRegister(mux *http.ServeMux) {
 	//// hook up the flow, interactor -> presenter
 	//interactor.Output = presenter
 	//
-	//// controller -> interactor
-	//controller.Output = interactor
+	//// tests(tobemoved) -> interactor
+	//tests(tobemoved).Output = interactor
 
 
 	// CAUTION: this stuff has to be set up in this way because of pass-by-value vs pass-by-reference semantics!
