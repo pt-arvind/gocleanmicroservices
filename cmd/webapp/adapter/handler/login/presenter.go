@@ -3,7 +3,7 @@ package login
 import (
 	"net/http"
 	"fmt"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 	"github.com/pt-arvind/gocleanarchitecture/domain"
 )
 

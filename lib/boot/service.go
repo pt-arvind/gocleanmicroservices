@@ -5,7 +5,7 @@ import (
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
 	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 )
 
 // Service represents all the services that the application uses.

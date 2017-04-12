@@ -2,7 +2,7 @@ package register
 
 import (
 	"net/http"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 )
 
 //TODO: not the best spot to put this

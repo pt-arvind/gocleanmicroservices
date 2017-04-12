@@ -3,8 +3,8 @@ package boot
 import (
 	"net/http"
 
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic/handler/login"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic/handler/register"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/handler/login"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/handler/register"
 	//"fmt"
 )
 

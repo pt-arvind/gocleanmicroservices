@@ -2,7 +2,7 @@ package login
 
 import (
 	"net/http"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
 	"errors"
 )
 
