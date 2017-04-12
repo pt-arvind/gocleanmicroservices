@@ -15,3 +15,7 @@ func AssertNotNil(t *testing.T, actualValue interface{}) {
 		t.Errorf("\n got: %v\ndidn't want: %v", actualValue, nil)
 	}
 }
+
+func AssertFailure(t *testing.T, message string) {
+	t.Errorf("Assertion failure: %s", message, nil)
+}
