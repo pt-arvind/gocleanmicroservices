@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	//"github.com/pt-arvind/gocleanarchitecture/controller"
-	"github.com/pt-arvind/gocleanarchitecture/login"
+	"github.com/pt-arvind/gocleanarchitecture/cmd/logic/handler/login"
 	"github.com/pt-arvind/gocleanarchitecture/domain"
 	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
 	"github.com/pt-arvind/gocleanarchitecture/lib/view"
