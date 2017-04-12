@@ -72,7 +72,6 @@ func (interactor *UserInteractor) Index() {
 func (interactor *UserInteractor) Authenticate(email string, password string) {
 	item, err := interactor.userRepo.FindByEmail(email)
 	if err != nil {
-		//return domain.ErrUserNotFound
 		interactor.output.Error(domain.ErrUserNotFound)
 		return
 	}
@@ -81,11 +80,9 @@ func (interactor *UserInteractor) Authenticate(email string, password string) {
 	if interactor.passhash.Match(item.Password, password) {
 		item.Password = password //unhashed pass to keep consistency
 		interactor.output.Authenticated(*item)
-		//return nil
 		return
 	}
 
-	//return domain.ErrUserPasswordNotMatch
 	interactor.output.Error(domain.ErrUserPasswordNotMatch)
 }
 
@@ -98,7 +95,6 @@ func (interactor *UserInteractor) User(email string) {
 		//return item, domain.ErrUserNotFound
 	}
 
-	//return item, nil
 	interactor.output.UserRetrieved(*item)
 }
 
@@ -139,5 +135,4 @@ func (interactor *UserInteractor) CreateUser(firstName string, lastName string, 
 	}
 
 	interactor.output.UserCreated(*item)
-	//return err
 }

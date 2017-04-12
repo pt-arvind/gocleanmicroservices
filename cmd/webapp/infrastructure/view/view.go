@@ -86,11 +86,6 @@ func (v *Item) SetVars(vars viewport.ViewVars) {
 // Render outputs the template to the ResponseWriter.
 func (v *Item) Render(w http.ResponseWriter, r *http.Request) error {
 	// Determine if there is an error in the template syntax.
-
-
-
-
-
 	tc, err := template.ParseFiles(v.baseTemplate+"."+v.extension,
 		v.template+"."+v.extension)
 	if err != nil {

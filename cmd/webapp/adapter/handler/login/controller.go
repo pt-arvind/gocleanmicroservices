@@ -8,10 +8,10 @@ import (
 
 type Controller struct {
 	Output  	logic.UserInteractorInput
-	Presenter	*Presenter
+	Presenter	*Presenter //TODO: should be a PresenterInput so we can swap em out if we ever want to!
 }
 
-//TODO: not the best spot to put this
+//TODO: make this a shared adapter: level object
 type Connection struct {
 	Request *http.Request
 	Writer PresenterOutput
@@ -22,7 +22,7 @@ type Connection struct {
 func (controller *Controller) Route(writer http.ResponseWriter, request *http.Request) {
 
 	// set connection on presenter :(
-	// TODO: would love a better solution than this...
+	// TODO: perhaps a router could handle doing this part for us and remove the reference between controller and presenter?
 	controller.Presenter.Connection = Connection{Writer: writer, Request: request}
 
 	if request.URL.Path != "/" {
@@ -45,32 +45,16 @@ func (controller *Controller) index(writer http.ResponseWriter, request *http.Re
 
 // Store handles the submission of the login information.
 func (controller *Controller) authenticate(writer http.ResponseWriter, request *http.Request) {
-	// call store on interactor
-	//tests(tobemoved).Output.RequestStore(connection)
 
-
-	// validation of this level should honestly take place in javascript or prior to even getting here!
-	//for _, v := range []string{"email", "password"} {
-	//	if len(conn.Request.FormValue(v)) == 0 {
-	//		interactor.Output.Present400(conn)
-	//		return
-	//	}
-	//}
-
-
-	//user := new(domain.User)
-
+	for _, v := range []string{"email", "password"} {
+		if len(request.FormValue(v)) == 0 {
+			controller.Output.Error(errors.New("fill out all form fields prior to submitting!"))
+			return
+		}
+	}
 
 	email := request.FormValue("email")
 	password := request.FormValue("password")
-
-	//err := interactor.UserInteractor.Authenticate(user)
-
-	//if err != nil {
-	//	interactor.Output.Present401(conn) //realistically would probably pass that error along
-	//} else {
-	//	interactor.Output.PresentSuccessfulLogin(conn) // realistically, you'd want to have something here that would pass along the user you just made
-	//}
 
 	controller.Output.Authenticate(email, password)
 

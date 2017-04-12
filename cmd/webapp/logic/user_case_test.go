@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"cloudtamer/portal/domain"
-	"cloudtamer/portal/lib/passhash"
-	"cloudtamer/portal/repository"
-	"cloudtamer/portal/logic"
+	"cloudtamer/portal/cmd/webapp/infrastructure/passhash"
+	"cloudtamer/portal/cmd/webapp/adapter/repository"
+	"cloudtamer/portal/cmd/webapp/logic"
 )
 
 //  BadHasher represents a password hashing system that always fails.

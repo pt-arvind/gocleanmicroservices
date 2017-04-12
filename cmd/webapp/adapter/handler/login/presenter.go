@@ -10,11 +10,6 @@ import (
 )
 
 type PresenterInput interface {
-	//Present404(conn Connection)
-	//Present400(conn Connection)
-	//Present401(conn Connection)
-	//PresentSuccessfulLogin(conn Connection)
-	//PresentIndex(conn Connection)
 	logic.UserInteractorOutput
 }
 

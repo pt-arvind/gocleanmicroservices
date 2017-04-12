@@ -3,9 +3,10 @@ package register
 import (
 	"net/http"
 	"cloudtamer/portal/cmd/webapp/logic"
+	"github.com/pkg/errors"
 )
 
-//TODO: not the best spot to put this
+//TODO: make this a shared adapter: level object
 type Connection struct {
 	Request *http.Request
 	Writer PresenterOutput
@@ -35,15 +36,15 @@ func (controller *Controller) index(writer http.ResponseWriter, request *http.Re
 }
 
 func (controller *Controller) createUser(writer http.ResponseWriter, request *http.Request) {
-	// Don't continue if required fields are missing.
-	// validation
-	//for _, v := range []string{"firstname", "lastname", "email", "password"} {
-	//	if len(request.FormValue(v)) == 0 {
-	//		//call presenter present400
-	//		interactor.Output.Present400(conn)
-	//		return
-	//	}
-	//}
+
+	//Don't continue if required fields are missing.
+	 //validation
+	for _, v := range []string{"firstname", "lastname", "email", "password"} {
+		if len(request.FormValue(v)) == 0 {
+			controller.Output.Error(errors.New("invalid input! you must fill out all the form fields!"))
+			return
+		}
+	}
 
 	firstname := request.FormValue("firstname")
 	lastname := request.FormValue("lastname")
