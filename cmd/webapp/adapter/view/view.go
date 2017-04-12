@@ -6,6 +6,7 @@ import (
 	"path"
 
 	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"os"
 )
 
 // Item represents a view template.
@@ -23,11 +24,17 @@ func New(folder string, extension string) *Item {
 	v := new(Item)
 
 	// Set the initial values.
-	v.SetFolder(folder)
+	cwd, err := os.Getwd() //FIXME: may not work for tests
+	if err != nil {
+		panic("couldn't get current working directory")
+	}
+
+	v.SetFolder(path.Join(cwd, folder))
 	v.SetExtension(extension)
 	v.SetBaseTemplate("base")
 	v.SetTemplate("default")
 	v.SetVars(domain.ViewVars{})
+
 
 	return v
 }
@@ -79,6 +86,11 @@ func (v *Item) SetVars(vars domain.ViewVars) {
 // Render outputs the template to the ResponseWriter.
 func (v *Item) Render(w http.ResponseWriter, r *http.Request) error {
 	// Determine if there is an error in the template syntax.
+
+
+
+
+
 	tc, err := template.ParseFiles(v.baseTemplate+"."+v.extension,
 		v.template+"."+v.extension)
 	if err != nil {

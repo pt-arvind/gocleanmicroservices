@@ -1,4 +1,4 @@
-package domain
+package domain //FIXME: should not be in domain
 
 import "net/http"
 
