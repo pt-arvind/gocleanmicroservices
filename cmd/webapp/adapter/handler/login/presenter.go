@@ -3,9 +3,9 @@ package login
 import (
 	"net/http"
 	"fmt"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
+	"cloudtamer/portal/cmd/webapp/logic"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/cmd/webapp/adapter/viewport"
 
 )
 

@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/boot"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/cmd/webapp/infrastructure/boot"
+	"cloudtamer/portal/cmd/webapp/logic"
 )
 
 // TestRegisterServices ensures each of the services is set up properly.

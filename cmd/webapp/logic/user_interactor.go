@@ -1,7 +1,7 @@
 package logic
 
 import (
-	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"cloudtamer/portal/domain"
 )
 
 // UserInteractor represents a service for managing users.

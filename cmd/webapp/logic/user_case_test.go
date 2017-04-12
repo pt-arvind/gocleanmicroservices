@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
-	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/lib/passhash"
+	"cloudtamer/portal/repository"
+	"cloudtamer/portal/logic"
 )
 
 //  BadHasher represents a password hashing system that always fails.

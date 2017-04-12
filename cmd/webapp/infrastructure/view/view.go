@@ -6,7 +6,7 @@ import (
 	"path"
 
 	"os"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
+	"cloudtamer/portal/cmd/webapp/adapter/viewport"
 )
 
 // Item represents a view template.

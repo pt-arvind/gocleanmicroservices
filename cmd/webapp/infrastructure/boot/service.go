@@ -1,12 +1,12 @@
 package boot
 
 import (
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/passhash"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/view"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/infrastructure/jsondb"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/repository"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/logic"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
+	"cloudtamer/portal/cmd/webapp/infrastructure/passhash"
+	"cloudtamer/portal/cmd/webapp/infrastructure/view"
+	"cloudtamer/portal/cmd/webapp/infrastructure/jsondb"
+	"cloudtamer/portal/cmd/webapp/adapter/repository"
+	"cloudtamer/portal/cmd/webapp/logic"
+	"cloudtamer/portal/cmd/webapp/adapter/viewport"
 )
 
 // Service represents all the services that the application uses.

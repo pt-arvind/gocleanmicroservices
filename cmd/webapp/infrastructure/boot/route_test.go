@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/lib/boot"
+	"cloudtamer/portal/lib/boot"
 )
 
 // TestRoutes ensures each of the routes is set up properly.

@@ -3,8 +3,8 @@ package boot
 import (
 	"net/http"
 
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/handler/login"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/handler/register"
+	"cloudtamer/portal/cmd/webapp/adapter/handler/login"
+	"cloudtamer/portal/cmd/webapp/adapter/handler/register"
 	//"fmt"
 )
 

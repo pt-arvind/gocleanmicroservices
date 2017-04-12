@@ -2,8 +2,8 @@ package register
 
 import (
 	"net/http"
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/cmd/webapp/adapter/viewport"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/cmd/webapp/adapter/viewport"
 	"fmt"
 )
 

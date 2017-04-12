@@ -3,8 +3,8 @@ package repository_test
 import (
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/repository"
 )
 
 // TestUserRepo tests the user repo.

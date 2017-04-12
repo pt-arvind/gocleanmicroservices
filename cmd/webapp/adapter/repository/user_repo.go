@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/pt-arvind/gocleanarchitecture/domain"
+import "cloudtamer/portal/domain"
 
 // Service represents a service for interacting with the database.
 type Service interface {

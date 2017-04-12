@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/repository"
 )
 
 // TestClient ensures the client works properly.

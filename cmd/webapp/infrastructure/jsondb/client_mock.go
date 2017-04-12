@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"cloudtamer/portal/domain"
 )
 
 // MockService represents a service for managing users.

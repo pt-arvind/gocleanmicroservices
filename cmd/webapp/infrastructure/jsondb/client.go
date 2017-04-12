@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
+	"cloudtamer/portal/domain"
 )
 
 // Schema represents the database structure.

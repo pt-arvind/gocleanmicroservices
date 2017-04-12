@@ -3,8 +3,8 @@ package jsondb_test
 import (
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/domain"
-	"github.com/pt-arvind/gocleanarchitecture/repository"
+	"cloudtamer/portal/domain"
+	"cloudtamer/portal/repository"
 )
 
 // TestMockService ensures the mock service works correctly.

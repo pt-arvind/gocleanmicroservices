@@ -6,11 +6,11 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/pt-arvind/gocleanarchitecture/tests(tobemoved)"
-	"github.com/pt-arvind/gocleanarchitecture/lib/passhash"
-	"github.com/pt-arvind/gocleanarchitecture/lib/view"
-	"github.com/pt-arvind/gocleanarchitecture/repository"
-	"github.com/pt-arvind/gocleanarchitecture/logic"
+	"cloudtamer/portal/tests(tobemoved)"
+	"cloudtamer/portal/lib/passhash"
+	"cloudtamer/portal/lib/view"
+	"cloudtamer/portal/repository"
+	"cloudtamer/portal/logic"
 )
 
 // TestRegisterIndex ensures the index function returns a 200 code.
