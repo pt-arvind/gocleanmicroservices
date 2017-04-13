@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"cloudtamer/portal/domain"
+	"domain"
 )
 
 // MockService represents a service for managing users.

@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"cloudtamer/portal/lib/boot"
+	"cmd/webapp/infrastructure/boot"
 )
 
 // TestRoutes ensures each of the routes is set up properly.

@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"cloudtamer/portal/domain"
+	"domain"
 )
 
 // Schema represents the database structure.

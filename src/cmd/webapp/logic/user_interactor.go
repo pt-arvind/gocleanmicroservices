@@ -1,7 +1,7 @@
 package logic
 
 import (
-	"cloudtamer/portal/domain"
+	"domain"
 )
 
 // UserInteractor represents a service for managing users.

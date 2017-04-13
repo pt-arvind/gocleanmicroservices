@@ -3,9 +3,9 @@ package login
 import (
 	"net/http"
 	"fmt"
-	"cloudtamer/portal/cmd/webapp/logic"
-	"cloudtamer/portal/domain"
-	"cloudtamer/portal/cmd/webapp/adapter/viewport"
+	"cmd/webapp/logic"
+	"domain"
+	"cmd/webapp/adapter/viewport"
 
 )
 

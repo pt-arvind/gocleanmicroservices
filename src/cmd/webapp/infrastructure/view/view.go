@@ -5,8 +5,7 @@ import (
 	"net/http"
 	"path"
 
-	"os"
-	"cloudtamer/portal/cmd/webapp/adapter/viewport"
+	"cmd/webapp/adapter/viewport"
 )
 
 // Item represents a view template.
@@ -22,19 +21,11 @@ type Item struct {
 // New returns a new template.
 func New(folder string, extension string) *Item {
 	v := new(Item)
-
-	// Set the initial values.
-	cwd, err := os.Getwd() //FIXME: may not work for tests
-	if err != nil {
-		panic("couldn't get current working directory")
-	}
-
-	v.SetFolder(path.Join(cwd, folder))
+	v.SetFolder(folder)
 	v.SetExtension(extension)
 	v.SetBaseTemplate("base")
 	v.SetTemplate("default")
 	v.SetVars(viewport.ViewVars{})
-
 
 	return v
 }
@@ -56,7 +47,9 @@ func (v *Item) SetBaseTemplate(s string) {
 
 // SetTemplate sets the template to render.
 func (v *Item) SetTemplate(s string) {
-	v.template = path.Join(v.folder, s)
+	// This ensures tests work properly as well since they start in a different
+	// folder.
+	v.template = path.Join(path.Dir(v.folder), s)
 }
 
 // AddVar adds a variable to the template variable map.

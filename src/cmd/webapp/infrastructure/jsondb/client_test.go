@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"cloudtamer/portal/domain"
-	"cloudtamer/portal/repository"
+	"domain"
+	"repository"
 )
 
 // TestClient ensures the client works properly.

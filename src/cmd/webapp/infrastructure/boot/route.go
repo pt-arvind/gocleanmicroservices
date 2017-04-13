@@ -3,8 +3,8 @@ package boot
 import (
 	"net/http"
 
-	"cloudtamer/portal/cmd/webapp/adapter/handler/login"
-	"cloudtamer/portal/cmd/webapp/adapter/handler/register"
+	"cmd/webapp/adapter/handler/login"
+	"cmd/webapp/adapter/handler/register"
 )
 
 // LoadRoutes returns a handler with all the routes.

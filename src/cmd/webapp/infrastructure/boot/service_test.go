@@ -4,9 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"cloudtamer/portal/domain"
-	"cloudtamer/portal/cmd/webapp/infrastructure/boot"
-	"cloudtamer/portal/cmd/webapp/logic"
+	"cmd/webapp/infrastructure/boot"
+	"domain"
 )
 
 // TestRegisterServices ensures each of the services is set up properly.

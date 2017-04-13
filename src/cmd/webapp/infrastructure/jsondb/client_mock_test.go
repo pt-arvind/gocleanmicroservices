@@ -3,8 +3,8 @@ package jsondb_test
 import (
 	"testing"
 
-	"cloudtamer/portal/domain"
-	"cloudtamer/portal/repository"
+	"domain"
+	"repository"
 )
 
 // TestMockService ensures the mock service works correctly.

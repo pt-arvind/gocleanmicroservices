@@ -12,11 +12,12 @@ var (
 )
 
 // User represents a user of the system.
-type User struct { //FIXME: should not have json tags in here
-	FirstName string `json:"firstname"`
-	LastName  string `json:"lastname"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
+type User struct {
+	ID        int
+	FirstName string
+	LastName  string
+	Email     string
+	Password  string
 }
 
 // UserRepo represents a service for storage of users.

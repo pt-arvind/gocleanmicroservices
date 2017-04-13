@@ -3,8 +3,8 @@ package repository_test
 import (
 	"testing"
 
-	"cloudtamer/portal/domain"
-	"cloudtamer/portal/repository"
+	"domain"
+	"repository"
 )
 
 // TestUserRepo tests the user repo.

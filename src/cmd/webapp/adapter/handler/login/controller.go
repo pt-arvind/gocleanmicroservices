@@ -2,7 +2,7 @@ package login
 
 import (
 	"net/http"
-	"cloudtamer/portal/cmd/webapp/logic"
+	"cmd/webapp/logic"
 	"errors"
 )
 

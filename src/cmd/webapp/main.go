@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"cloudtamer/portal/cmd/webapp/infrastructure/boot"
+	"cmd/webapp/infrastructure/boot"
 )
 
 // main is the entrypoint for the application.

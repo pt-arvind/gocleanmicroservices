@@ -1,22 +1,21 @@
 package register
 
 import (
+	"cmd/webapp/logic"
+	"errors"
 	"net/http"
-	"cloudtamer/portal/cmd/webapp/logic"
-	"github.com/pkg/errors"
 )
 
 //TODO: make this a shared adapter: level object
 type Connection struct {
 	Request *http.Request
-	Writer PresenterOutput
+	Writer  PresenterOutput
 }
 
 type Controller struct {
-	Output  	logic.UserInteractorInput
-	Presenter	*Presenter
+	Output    logic.UserInteractorInput
+	Presenter *Presenter
 }
-
 
 // Index displays the register screen.
 func (controller *Controller) Route(writer http.ResponseWriter, request *http.Request) {
@@ -38,7 +37,7 @@ func (controller *Controller) index(writer http.ResponseWriter, request *http.Re
 func (controller *Controller) createUser(writer http.ResponseWriter, request *http.Request) {
 
 	//Don't continue if required fields are missing.
-	 //validation
+	//validation
 	for _, v := range []string{"firstname", "lastname", "email", "password"} {
 		if len(request.FormValue(v)) == 0 {
 			controller.Output.Error(errors.New("invalid input! you must fill out all the form fields!"))
@@ -51,5 +50,5 @@ func (controller *Controller) createUser(writer http.ResponseWriter, request *ht
 	email := request.FormValue("email")
 	password := request.FormValue("password")
 
-	controller.Output.CreateUser(firstname,lastname,email,password)
+	controller.Output.CreateUser(firstname, lastname, email, password)
 }

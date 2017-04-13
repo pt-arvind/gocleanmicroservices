@@ -2,8 +2,8 @@ package register
 
 import (
 	"net/http"
-	"cloudtamer/portal/domain"
-	"cloudtamer/portal/cmd/webapp/adapter/viewport"
+	"domain"
+	"cmd/webapp/adapter/viewport"
 	"fmt"
 )
 

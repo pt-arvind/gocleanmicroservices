@@ -1,6 +1,6 @@
 package repository
 
-import "cloudtamer/portal/domain"
+import "domain"
 
 // Service represents a service for interacting with the database.
 type Service interface {
