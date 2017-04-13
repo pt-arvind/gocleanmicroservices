@@ -1,5 +1,11 @@
+# OS Files
 .DS_Store
-db.json
-cmd/gocleanarchitecture/gocleanarchitecture
-cmd/gocleanarchitecture/gocleanarchitecture.exe
 .idea
+
+# App Specific Files
+db.json
+
+# Compiled folders
+bin/
+pkg/
+archive/
