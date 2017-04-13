@@ -19,9 +19,3 @@ type User struct {
 	Email     string
 	Password  string
 }
-
-// UserRepo represents a service for storage of users.
-type UserRepo interface {
-	FindByEmail(email string) (*User, error)
-	Store(item *User) error
-}
