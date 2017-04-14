@@ -78,7 +78,6 @@ func (i UserInteractor) Error(err error) {
 }
 
 func (i UserInteractor) Users(users []domain.User) {
-	fmt.Println("GOT ALL USERS TIME TO PRESENT")
 	i.output.AllUsers(users)
 }
 
@@ -89,7 +88,6 @@ func (i *UserInteractor) SetOutput(output UserInteractorOutput) {
 }
 
 func (i *UserInteractor) GetAllUsers() {
-	fmt.Println("GETALLUSERS")
 	i.repo.AllUsers()
 }
 

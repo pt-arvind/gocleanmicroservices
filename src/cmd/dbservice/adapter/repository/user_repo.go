@@ -76,10 +76,7 @@ func (s *UserRepo) SetOutput(out logic.UserRepoOutput) {
 }
 
 func (s *UserRepo) AllUsers() {
-	fmt.Println("ALLUSERS")
 	s.client.Records(func (users []domain.User) {
-		fmt.Println("GOT RECORDS")
-
 		s.output.Users(users)
 	})
 }

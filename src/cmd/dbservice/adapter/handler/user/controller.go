@@ -6,7 +6,6 @@ import (
 	"cmd/dbservice/logic"
 	"domain"
 	"strconv"
-	"fmt"
 )
 
 type Controller struct {
