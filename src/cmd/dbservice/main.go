@@ -15,7 +15,7 @@ func main() {
 	http.Handle("/", handler)
 
 	// Display message on the server.
-	log.Println("Server started.")
+	log.Println("Database Service started.")
 
 	// Run the web listener.
 	http.ListenAndServe(":8081", handler)
