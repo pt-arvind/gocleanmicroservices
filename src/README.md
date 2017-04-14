@@ -4,6 +4,13 @@
 [![GoDoc](https://godoc.org/cloudtamer/portal?status.svg)](https://godoc.org/cloudtamer/portal)
 [![Coverage Status](https://coveralls.io/repos/github/pt-arvind/gocleanarchitecture/badge.svg?branch=master&randid=4)](https://coveralls.io/github/pt-arvind/gocleanarchitecture?branch=master)
 
+Change your $GOPATH to the root of where you install this!
+
+Run it by going to each microservice in the cmd folder and running the main.go
+
+Watch them communicate!
+
+
 A good example of clean architecture for a web application in Go.
 
 The **domain** folder is for entities without any dependencies.

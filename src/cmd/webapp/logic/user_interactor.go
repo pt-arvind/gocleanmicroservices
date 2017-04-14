@@ -41,7 +41,6 @@ type UserInteractorFactory struct {
 
 func (factory UserInteractorFactory) NewUseCaseInteractor(repo domain.UserRepo) UserInteractorInput {
 	interactor := new(UserInteractor)
-	//interactor.userRepo = factory.userRepo
 	interactor.userRepo = repo
 	interactor.passhash = factory.passhash
 
