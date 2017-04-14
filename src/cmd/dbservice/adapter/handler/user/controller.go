@@ -2,36 +2,40 @@ package user
 
 import (
 	"net/http"
-	"github.com/blue-jay/core/router" //FIXME: use an interface to inject it
 	"cmd/dbservice/logic"
 	"domain"
 	"strconv"
 )
 
+type ParamExtractor interface {
+	Param(r *http.Request, name string) string
+}
+
 type Controller struct {
 	Output  	logic.UserInteractorInput
-	Presenter	*Presenter //TODO: should be a PresenterInput so we can swap em out if we ever want to!
+	ParamExtractor	ParamExtractor
+	//Presenter	*Presenter //TODO: should be a PresenterInput so we can swap em out if we ever want to!
 }
 
 //TODO: make this a shared adapter: level object
-type Connection struct {
-	Request *http.Request
-	Writer PresenterOutput
-}
+//type Connection struct {
+//	Request *http.Request
+//	Writer PresenterOutput
+//}
+//
+//func (c *Controller) Route() {
+//	router.Post("/user", c.create)
+//	router.Get("/user", c.index)
+//	router.Get("/user/:id", c.show)
+//}
 
-func (c *Controller) Route() {
-	router.Post("/user", c.create)
-	router.Get("/user", c.index)
-	router.Get("/user/:id", c.show)
-}
-
-func (c *Controller) index(w http.ResponseWriter, r *http.Request) {
-	c.Presenter.Connection = Connection{Writer: w, Request: r}
+func (c *Controller) Index(r *http.Request) {
+	//c.Presenter.Connection = Connection{Writer: w, Request: r}
 	c.Output.GetAllUsers()
 }
 
-func (c *Controller) create(w http.ResponseWriter, r *http.Request) {
-	c.Presenter.Connection = Connection{Writer: w, Request: r}
+func (c *Controller) Create(r *http.Request) {
+	//c.Presenter.Connection = Connection{Writer: w, Request: r}
 
 	r.ParseForm()
 	firstname := r.PostFormValue("firstname")
@@ -44,9 +48,9 @@ func (c *Controller) create(w http.ResponseWriter, r *http.Request) {
 	c.Output.CreateUser(user)
 }
 
-func (c *Controller) show(w http.ResponseWriter, r *http.Request) {
-	c.Presenter.Connection = Connection{Writer: w, Request: r}
-	userID, err := strconv.Atoi(router.Param(r, "id"))
+func (c *Controller) Show(r *http.Request) {
+	//c.Presenter.Connection = Connection{Writer: w, Request: r}
+	userID, err := strconv.Atoi(c.ParamExtractor.Param(r, "id"))
 
 	if err != nil {
 		c.Output.Error(err)

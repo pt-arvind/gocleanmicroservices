@@ -19,14 +19,20 @@ func (s *Service) LoadRoutes() http.Handler {
 
 	handler := router.Instance()
 
-	s.AddUser(handler)
+	s.AddUserEndpoint()
 
 
 	// Return the handler.
 	return handler
 }
 
-func (s *Service) AddUser(router http.Handler) {
+type ParamExtractor struct {
+}
+func (p ParamExtractor) Param(r *http.Request, name string) string {
+	return router.Param(r, name)
+}
+
+func (s *Service) AddUserEndpoint() {
 	controller := new(user.Controller)
 
 	userService := s.UserService
@@ -42,13 +48,26 @@ func (s *Service) AddUser(router http.Handler) {
 	// hook up the flow, interactor -> presenter
 	interactor.SetOutput(presenter)
 
-	// tests(tobemoved) -> interactor
 	controller.Output = interactor
-	controller.Presenter = presenter // :( this is so that we can set the connection on the presenter as it passes through
+	controller.ParamExtractor = ParamExtractor{}
 
 
 	// Load routes.
-	controller.Route()
+	router.Post("/user", func(w http.ResponseWriter, r *http.Request) {
+		presenter.Connection = w
+		controller.Create(r)
+
+	})
+	router.Get("/user", func(w http.ResponseWriter, r *http.Request) {
+		presenter.Connection = w
+		controller.Index(r)
+	})
+	router.Get("/user/:id", func(w http.ResponseWriter, r *http.Request) {
+		presenter.Connection = w
+		controller.Show(r)
+	})
+
+	//controller.Route()
 }
 //
 //// AddLogin registers the login handlers.
