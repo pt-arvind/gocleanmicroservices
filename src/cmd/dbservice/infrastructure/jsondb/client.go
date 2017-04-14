@@ -9,11 +9,6 @@ import (
 	"domain"
 )
 
-//TODO:  must use dbservice to actually store shit
-//TODO:  have some sort of config to point to dbservice
-//TODO:  get the info from dbservice asynchronously
-
-
 // Schema represents the database structure.
 type Schema struct {
 	Records []User
@@ -28,7 +23,6 @@ type Client struct {
 	mutex sync.RWMutex
 
 	latestID int
-	//output repository.ServiceOutput
 }
 
 // NewClient returns a new database client.

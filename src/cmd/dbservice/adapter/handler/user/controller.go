@@ -14,29 +14,13 @@ type ParamExtractor interface {
 type Controller struct {
 	Output  	logic.UserInteractorInput
 	ParamExtractor	ParamExtractor
-	//Presenter	*Presenter //TODO: should be a PresenterInput so we can swap em out if we ever want to!
 }
 
-//TODO: make this a shared adapter: level object
-//type Connection struct {
-//	Request *http.Request
-//	Writer PresenterOutput
-//}
-//
-//func (c *Controller) Route() {
-//	router.Post("/user", c.create)
-//	router.Get("/user", c.index)
-//	router.Get("/user/:id", c.show)
-//}
-
 func (c *Controller) Index(r *http.Request) {
-	//c.Presenter.Connection = Connection{Writer: w, Request: r}
 	c.Output.GetAllUsers()
 }
 
 func (c *Controller) Create(r *http.Request) {
-	//c.Presenter.Connection = Connection{Writer: w, Request: r}
-
 	r.ParseForm()
 	firstname := r.PostFormValue("firstname")
 	lastname := r.PostFormValue("lastname")
@@ -49,7 +33,6 @@ func (c *Controller) Create(r *http.Request) {
 }
 
 func (c *Controller) Show(r *http.Request) {
-	//c.Presenter.Connection = Connection{Writer: w, Request: r}
 	userID, err := strconv.Atoi(c.ParamExtractor.Param(r, "id"))
 
 	if err != nil {
@@ -57,7 +40,6 @@ func (c *Controller) Show(r *http.Request) {
 		return
 	}
 
-	//call interactor to get user by id
 	c.Output.GetUser(userID)
 }
 

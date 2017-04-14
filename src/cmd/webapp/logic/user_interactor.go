@@ -96,7 +96,6 @@ func (interactor *UserInteractor) User(email string) {
 		if err != nil {
 			interactor.output.Error(domain.ErrUserNotFound)
 			return
-			//return item, domain.ErrUserNotFound
 		}
 
 		interactor.output.UserRetrieved(*user)

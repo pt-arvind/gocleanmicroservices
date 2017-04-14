@@ -18,11 +18,6 @@ var (
 
 // Service represents a service for interacting with the database.
 type ServiceInput interface {
-	//Read() error
-	//Write() error
-	//Records() []domain.User
-	//AddRecord(domain.User)
-
 	Load(output func(err error))
 	Save(output func(err error))
 	Records(output func([]domain.User))
