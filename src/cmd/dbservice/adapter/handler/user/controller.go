@@ -27,15 +27,14 @@ func (c *Controller) Route() {
 }
 
 func (c *Controller) index(w http.ResponseWriter, r *http.Request) {
-	fmt.Print("TEST")
 	c.Presenter.Connection = Connection{Writer: w, Request: r}
 	c.Output.GetAllUsers()
 }
 
 func (c *Controller) create(w http.ResponseWriter, r *http.Request) {
 	c.Presenter.Connection = Connection{Writer: w, Request: r}
-	r.ParseForm()
 
+	r.ParseForm()
 	firstname := r.PostFormValue("firstname")
 	lastname := r.PostFormValue("lastname")
 	email := r.PostFormValue("email")
@@ -47,7 +46,6 @@ func (c *Controller) create(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Controller) show(w http.ResponseWriter, r *http.Request) {
-	fmt.Print("TEST2")
 	c.Presenter.Connection = Connection{Writer: w, Request: r}
 	userID, err := strconv.Atoi(router.Param(r, "id"))
 
