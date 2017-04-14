@@ -6,7 +6,6 @@ import (
 	"domain"
 	"errors"
 	"cmd/dbservice/logic"
-	"fmt"
 )
 
 
