@@ -6,7 +6,6 @@ import (
 	"net/url"
 	"strings"
 	"encoding/json"
-	"fmt"
 )
 
 //type ServiceInput interface {
@@ -21,24 +20,19 @@ type Client struct {
 }
 
 func (c Client) Records(output func(users []domain.User, err error)) {
-	fmt.Println("GOT HERE")
-	req, err := http.NewRequest("GET", "localhost:8081/user", nil)
+	req, err := http.NewRequest("GET", "http://localhost:8081/user", nil)
 
 	if err != nil {
-		fmt.Println("request flunk")
 		output(nil, err)
 		return
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	// FIXME: do it async
-	fmt.Println(req)
-
 	resp, err := c.Client.Do(req)
 
 
 	if err != nil {
-		fmt.Println("request flunk 2")
 		output(nil, err)
 		return
 	}
@@ -47,7 +41,6 @@ func (c Client) Records(output func(users []domain.User, err error)) {
 	jsonResponse := JSONResponse{}
 	err = json.NewDecoder(resp.Body).Decode(&jsonResponse)
 	if err != nil {
-		fmt.Println("json flunk")
 		output(nil, err)
 		return
 	}
@@ -59,16 +52,12 @@ func (c Client) Records(output func(users []domain.User, err error)) {
 		users = append(users, user)
 	}
 
-	fmt.Println("good")
-
-
 	output(users, nil)
 
 
 }
 
 func (c Client) AddRecord(user domain.User, output func(user *domain.User, err error)) {
-	fmt.Println("REGISTER ")
 	form := url.Values{}
 	form.Add("firstname", user.FirstName)
 	form.Add("lastname", user.LastName)
@@ -76,7 +65,7 @@ func (c Client) AddRecord(user domain.User, output func(user *domain.User, err e
 	form.Add("password", user.Password)
 
 	//FIXME: make this stuff injectable/configurable
-	req, err := http.NewRequest("POST", "localhost:8081/user", strings.NewReader(form.Encode()))
+	req, err := http.NewRequest("POST", "http://localhost:8081/user", strings.NewReader(form.Encode()))
 	req.PostForm = form
 
 	if err != nil {
