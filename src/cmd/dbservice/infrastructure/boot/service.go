@@ -31,12 +31,5 @@ func RegisterServices() *Service {
 	s.UserService = *logic.NewInteractorFactory()
 	s.ViewService = view.JSONViewFactory{}
 
-
-	// Store all the services for the application.
-	//s.UserService = *logic.NewInteractorFactory(
-	//	repository.NewUserRepo(db),
-	//	new(passhash.Item))
-	//s.ViewService = view.New("infrastructure/html/", "tmpl")
-
 	return s
 }

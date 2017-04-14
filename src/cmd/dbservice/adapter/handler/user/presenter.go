@@ -25,11 +25,13 @@ func (p *Presenter) Error(err error) {
 }
 
 func (p *Presenter) UserStored(user domain.User) {
-	
+	users := []domain.User{user}
+	p.Output.Render(p.Connection.Writer, users, nil)
 }
 
 func (p *Presenter) UserFound(user domain.User) {
-
+	users := []domain.User{user}
+	p.Output.Render(p.Connection.Writer, users, nil)
 }
 
 func (p *Presenter) AllUsers(users []domain.User) {
