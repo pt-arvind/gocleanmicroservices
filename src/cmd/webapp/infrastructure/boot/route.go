@@ -5,6 +5,7 @@ import (
 
 	"cmd/webapp/adapter/handler/login"
 	"cmd/webapp/adapter/handler/register"
+	"cmd/webapp/adapter/repository"
 )
 
 // LoadRoutes returns a handler with all the routes.
@@ -27,7 +28,8 @@ func (s *Service) AddLogin(mux *http.ServeMux) {
 
 	userService := s.UserService
 
-	interactor := userService.NewUseCaseInteractor()
+	repo := repository.NewUserRepo(s.DBService)
+	interactor := userService.NewUseCaseInteractor(repo)
 
 	presenter := new(login.Presenter)
 	presenter.Output = s.ViewService
@@ -49,7 +51,8 @@ func (s *Service) AddRegister(mux *http.ServeMux) {
 	// CAUTION: this stuff has to be set up in this way because of pass-by-value vs pass-by-reference semantics!
 	userService := s.UserService
 
-	interactor := userService.NewUseCaseInteractor()
+	repo := repository.NewUserRepo(s.DBService)
+	interactor := userService.NewUseCaseInteractor(repo)
 
 	controller := new(register.Controller)
 

@@ -1,4 +1,4 @@
-package jsondb
+package dbservice
 
 import (
 	"errors"

@@ -1,4 +1,4 @@
-package jsondb_test
+package dbservice_test
 
 import (
 	"io/ioutil"
