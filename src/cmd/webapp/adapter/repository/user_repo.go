@@ -1,33 +1,48 @@
 package repository
 
+//adapter layer
+
 import "domain"
 
 // Service represents a service for interacting with the database.
-type Service interface {
+type ServiceInput interface {
 	Read() error
 	Write() error
 	Records() []domain.User
 	AddRecord(domain.User)
 }
 
+type ServiceOutput interface {
+	DidRead()
+	DidStore()
+	Error()
+}
+
 // UserRepo represents a service for storage of users.
 type UserRepo struct {
-	client Service
+	client ServiceInput
 }
 
 // NewUserRepo returns the service for storage of users.
-func NewUserRepo(client Service) *UserRepo {
+func NewUserRepo(client ServiceInput) *UserRepo {
 	s := new(UserRepo)
 	s.client = client
 	return s
 }
+
+/*
+	load
+	get all users
+	get user by email
+	write
+ */
 
 // FindByEmail returns a user by an email.
 func (s *UserRepo) FindByEmail(email string) (*domain.User, error) {
 	item := new(domain.User)
 
 	// Load the data.
-	err := s.client.Read()
+	err := s.client.Read() //FIXME: shouldn't be here
 	if err != nil {
 		return item, err
 	}
@@ -45,7 +60,7 @@ func (s *UserRepo) FindByEmail(email string) (*domain.User, error) {
 // Store adds a user.
 func (s *UserRepo) Store(item *domain.User) error {
 	// Load the data.
-	err := s.client.Read()
+	err := s.client.Read() //FIXME: shouldn't be here
 	if err != nil {
 		return err
 	}
@@ -56,3 +71,6 @@ func (s *UserRepo) Store(item *domain.User) error {
 	// Save the record to the database.
 	return s.client.Write()
 }
+
+
+

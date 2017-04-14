@@ -16,7 +16,7 @@ import (
 
 // Schema represents the database structure.
 type Schema struct {
-	Records []domain.User
+	Records []User
 }
 
 // Client represents a client to the data store.
@@ -26,6 +26,9 @@ type Client struct {
 
 	data  *Schema
 	mutex sync.RWMutex
+
+	latestID int
+	//output repository.ServiceOutput
 }
 
 // NewClient returns a new database client.
@@ -39,7 +42,7 @@ func NewClient(path string) *Client {
 }
 
 // Reads opens/initializes the database.
-func (c *Client) Load() error {
+func (c *Client) Load(output func(err error)) {
 	var err error
 	var b []byte
 
@@ -49,26 +52,45 @@ func (c *Client) Load() error {
 		err = ioutil.WriteFile(c.Path, []byte("{}"), 0644)
 		if err != nil {
 			c.mutex.Unlock()
-			return err
+			//c.output.Error(err)
+			output(err)
+			return
 		}
 	}
 
 	b, err = ioutil.ReadFile(c.Path)
 	if err != nil {
 		c.mutex.Unlock()
-		return err
+		output(err)
+		return
 	}
 
 	c.data = new(Schema)
 	err = json.Unmarshal(b, &c.data)
 
+	c.calculateLatestID()
+
 	c.mutex.Unlock()
 
-	return err
+	if err != nil {
+		output(err)
+		return
+	}
+
+	output(nil)
+}
+
+func (c *Client) calculateLatestID() {
+	for _, u := range c.data.Records {
+		if u.ID > c.latestID {
+			c.latestID = u.ID
+		}
+	}
+
 }
 
 // Write saves the database.
-func (c *Client) Write() error {
+func (c *Client) Save(output func(err error)) {
 	var err error
 	var b []byte
 
@@ -77,26 +99,41 @@ func (c *Client) Write() error {
 	b, err = json.Marshal(c.data)
 	if err != nil {
 		c.mutex.Unlock()
-		return err
+		//c.output.Error(err)
+		output(err)
+		return
 	}
 
 	err = ioutil.WriteFile(c.Path, b, 0644)
 	if err != nil {
 		c.mutex.Unlock()
-		return err
+		//c.output.Error(err)
+		output(err)
+		return
 	}
 
 	c.mutex.Unlock()
 
-	return err
+	//c.output.DidSave()
+	output(nil)
 }
 
 // AddRecord adds a record to the database.
-func (c *Client) AddRecord(rec domain.User) {
-	c.data.Records = append(c.data.Records, rec)
+func (c *Client) AddRecord(user domain.User, output func(user domain.User)) {
+
+	u := (&User{}).from(user)
+	c.latestID++ //dummy for incrementing ID's
+	u.ID = c.latestID
+
+	c.data.Records = append(c.data.Records, u)
+
+	//c.output.DidAddUser(rec)
+	output(u.toDomUser())
 }
 
+
 // Records retrieves all records from the database.
-func (c *Client) Records() []domain.User {
-	return c.data.Records
+func (c *Client) Records(output func([]domain.User)) {
+	//c.output.Records(c.data.Records)
+	output(DBtoDomain(c.data.Records))
 }

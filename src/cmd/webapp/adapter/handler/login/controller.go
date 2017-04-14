@@ -17,7 +17,6 @@ type Connection struct {
 	Writer PresenterOutput
 }
 
-
 // Index displays the logon screen.
 func (controller *Controller) Route(writer http.ResponseWriter, request *http.Request) {
 
@@ -57,5 +56,4 @@ func (controller *Controller) authenticate(writer http.ResponseWriter, request *
 	password := request.FormValue("password")
 
 	controller.Output.Authenticate(email, password)
-
 }
